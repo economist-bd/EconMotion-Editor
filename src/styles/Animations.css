@@ -1,0 +1,79 @@
+/* Animations.css */
+
+/* 1. Professional Reveal (সংজ্ঞার জন্য) */
+.anim-reveal {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.anim-reveal span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: slideUp 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
+
+/* 2. Focus Highlighter (গুরুত্বপূর্ণ শব্দের জন্য) */
+.anim-highlight {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.anim-highlight::before {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  width: 0%;
+  height: 40%;
+  background-color: #ffd500c4; /* উজ্জ্বল হলুদ */
+  z-index: -1;
+  animation: highlightSwipe 1s ease-in-out forwards 0.3s; /* একটু দেরি করে শুরু হবে */
+}
+
+@keyframes highlightSwipe {
+  to { width: 100%; }
+}
+
+/* 3. Subtle Economic Glitch (ভুল ধারণা ভাঙানোর জন্য) */
+.anim-glitch {
+  position: relative;
+  color: white;
+}
+
+.anim-glitch::before, .anim-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); /* ব্যাকগ্রাউন্ডের সাথে মিশে যাবে */
+}
+
+.anim-glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip-path: inset(0 0 0 0);
+  animation: glitch-anim-1 4s infinite linear alternate-reverse;
+}
+
+.anim-glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9;
+  clip-path: inset(0 0 0 0);
+  animation: glitch-anim-2 4s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); }
+  20% { clip-path: inset(60% 0 20% 0); }
+  100% { clip-path: inset(10% 0 90% 0); }
+}
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(80% 0 20% 0); }
+  20% { clip-path: inset(10% 0 90% 0); }
+  100% { clip-path: inset(30% 0 70% 0); }
+}
